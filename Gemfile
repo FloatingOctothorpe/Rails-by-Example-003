@@ -11,12 +11,15 @@ gem "rake", "0.8.7"
 
 gem 'sqlite3'
 
+gem 'gravatar_image_tag', '0.1.0'
+
 group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', '2.4.0'
 end
 
 group :test do
+  gem 'factory_girl_rails', '1.0'
   gem 'rspec', '2.6'
   gem 'webrat', '0.7.1'
 end
