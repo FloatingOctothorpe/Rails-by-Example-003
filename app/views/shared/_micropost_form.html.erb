@@ -2,6 +2,7 @@
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.text_area :content %>
+    <span style="display:none;" id="micropost_content_counter">140 characters left.</span>
   </div>
   <div class="actions">
     <%= f.submit "Submit" %>
