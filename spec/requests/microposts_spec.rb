@@ -27,7 +27,7 @@ describe "Microposts" do
 
     describe "success" do
 
-      it "should not make a new micropost" do
+      it "should make a new micropost" do
         content = "Lorem ipsum dolor sit amet"
         lambda do
           visit root_path
@@ -35,6 +35,16 @@ describe "Microposts" do
           click_button
           response.should have_selector("span.content", :content => content)
         end.should change(Micropost, :count).by(1)
+      end
+
+      it "should show the right number of microposts and pluralise correctly" do
+        ['1 micropost', '2 microposts', '3 microposts'].each do |expected_text|
+          visit root_path
+          fill_in :micropost_content, :with => "A post"
+          click_button
+          response.should render_template('pages/home')
+          response.should have_selector("span.microposts", :content => expected_text)
+        end
       end
     end
   end
