@@ -1,0 +1,13 @@
+<h1><%= @title %></h1>
+
+<% if @microposts.empty? %>
+  <p>There are currently no microposts.</p>
+<% else %>
+  <%= will_paginate %>
+  <ol class="microposts">
+    <% @microposts.each do |micropost| %>
+      <%= render micropost %>
+    <% end %>
+  </ol>
+  <%= will_paginate %>
+<% end %>

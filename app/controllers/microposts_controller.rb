@@ -2,7 +2,19 @@ class MicropostsController < ApplicationController
   before_filter :authenticate,    :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
 
-  
+  def index
+    @user = User.find(params[:user_id])
+    @title = "Microposts by #{@user.name}"
+    begin # handle invalid or high page numbers with a redirect
+      @microposts = @user.microposts.paginate(:page => params[:page])
+      if @microposts.empty? and Integer(params[:page]) > 1
+        redirect_to :action => :index
+      end
+    rescue Exception
+      redirect_to :action => :index
+    end
+  end
+
   def create
     @micropost = current_user.microposts.build(params[:micropost])
     if @micropost.save
